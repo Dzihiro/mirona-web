@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="logo.png">
+<title>MIRONA – ruční krejčovství</title>
+<meta name="description" content="MIRONA – ruční šití, opravy a úpravy oděvů a originální autorské kousky.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=EB+Garamond:wght@400;500&display=swap">
+<style>
+/* Layout: čistý, fotky v popředí; černá na bílé jako původní logo, jemná typografie */
+:root{
+  --bg:#FFFFFF;          /* bílá jako podklad loga */
+  --soft:#F6F5F3;
+  --ink:#111111;         /* černá jako logo */
+  --muted:#4F4F4F;
+  --line:#E6E6E6;
+  --leather:#111111;
+  --leather-ink:#FFFFFF;
+  --ph1:#F1F1F0; --ph2:#E7E7E5;
+  --f-soft:"Cinzel",Georgia,serif;
+  --logo:url("logo.png");
+  --f:"EB Garamond",Georgia,serif;
+  --gl:max(20px,env(safe-area-inset-left,0px));
+  --gr:max(20px,env(safe-area-inset-right,0px));
+  color-scheme:light;
+}
+/* Web je vždy světlý, bez tmavého režimu. */
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);font-size:19px;line-height:1.65;letter-spacing:.005em;font-weight:400}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+h2{font-family:var(--f-soft);font-size:.92rem;font-weight:600;letter-spacing:.22em;color:var(--ink);text-transform:uppercase;margin:0}
+p{margin:0}
+.wrap{max-width:1360px;margin:0 auto;padding-left:var(--gl);padding-right:var(--gr)}
+
+/* hlavička */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+header.top .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding-block:14px}
+header nav{display:flex;gap:32px;font-family:var(--f-soft);font-size:.95rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+header nav a{text-decoration:none}
+header nav a:hover{opacity:.6}
+header nav.right{justify-content:flex-end}
+.m-only{display:none}
+.logo-mark{display:block;background:var(--ink);-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat;aspect-ratio:1405/336}
+.logo .logo-mark{height:60px}
+@media (max-width:700px){
+  header.top .wrap{grid-template-columns:1fr;justify-items:center;gap:10px;padding-block:12px}
+  header nav{gap:26px;font-size:.88rem}
+  header nav.left{display:none}
+  .m-only{display:inline}
+  .logo .logo-mark{height:46px}
+}
+
+/* úvodní fotka */
+.hero-photos{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:1360px;margin:0 auto;padding-top:20px;padding-left:var(--gl);padding-right:var(--gr)}
+.hero-photos img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block;max-height:82vh;border-radius:6px}
+.hero-text .wrap{padding-block:40px 8px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.hero-text p{font-family:var(--f-soft);font-weight:400;font-size:clamp(1.6rem,3.3vw,2.5rem);line-height:1.2;max-width:18em}
+.btn{display:inline-block;padding:14px 28px;background:var(--leather);color:var(--leather-ink);border-radius:40px;text-decoration:none;font-family:var(--f-soft);font-size:.88rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.btn:hover{opacity:.85}
+
+
+/* zástupná fotka */
+.ph{position:relative;background:linear-gradient(135deg,var(--ph1),var(--ph2));display:grid;place-items:center;color:var(--muted);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;max-width:100%;width:100%}
+
+section{padding-block:72px}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.sec-head p{color:var(--ink);font-size:1.15rem}
+@media (max-width:700px){section{padding-block:48px}}
+
+/* co dělám – jedna řádka */
+.intro .wrap{display:grid;grid-template-columns:1fr 2fr;gap:40px}
+.intro .lead{font-size:clamp(1.35rem,2.4vw,1.8rem);font-weight:400;line-height:1.5;max-width:30em}
+.tags{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:24px;font-size:1.08rem;color:var(--muted);list-style:none;padding:0}
+@media (max-width:700px){.intro .wrap{grid-template-columns:1fr;gap:16px}}
+
+/* galerie */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gallery figure{margin:0;position:relative;overflow:hidden;border-radius:6px}
+.gallery .ph{aspect-ratio:4/5;transition:transform .5s ease}
+.gallery figure:hover .ph{transform:scale(1.03)}
+.gallery img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block;transition:transform .5s ease}
+.gallery figure:hover img{transform:scale(1.03)}
+.gallery figcaption{position:absolute;left:12px;bottom:10px;font-size:.82rem;letter-spacing:.06em;color:var(--ink);background:color-mix(in srgb,var(--bg) 88%,transparent);padding:4px 10px;border-radius:20px}
+@media (max-width:700px){.gallery{grid-template-columns:repeat(2,1fr);gap:8px}.hero-photos{gap:8px;padding-top:12px}}
+@media (prefers-reduced-motion:reduce){.gallery .ph,.gallery img{transition:none}}
+
+/* ceník – zatím skrytý */
+.plist{list-style:none;margin:0;padding:0;max-width:640px}
+.plist li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.plist .p{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* kontakt */
+.contact{background-color:var(--soft);border-top:1px solid var(--line)}
+.contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.contact-grid .k{font-family:var(--f-soft);font-size:.85rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.contact-grid .v{font-size:1.35rem;font-weight:500;color:var(--ink);overflow-wrap:anywhere;min-width:0}
+.contact-grid a{text-decoration:none;border-bottom:1px solid var(--ink)}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.contact-grid{grid-template-columns:1fr;gap:22px}}
+
+footer{padding-block:28px;font-size:.9rem;color:var(--muted);letter-spacing:.06em}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+footer .logo-mark{height:30px;background:var(--ink)}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <nav class="left" aria-label="Hlavní">
+      <a href="#galerie">Galerie</a>
+      <a href="#sluzby">Služby</a>
+    </nav>
+    <a class="logo" href="#" aria-label="MIRONA – úvod"><span class="logo-mark" role="img" aria-label="MIRONA"></span></a>
+    <nav class="right" aria-label="Kontakt">
+      <a class="m-only" href="#galerie">Galerie</a>
+      <!-- <a href="#cenik">Ceník</a>  ← odkomentovat, až bude ceník veřejný -->
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="hero-photos">
+      <img src="img/bunda-predni.jpg" alt="Kožená patchworková bunda, pohled zepředu" width="1000" height="1333">
+      <img src="img/bunda-zadni.jpg" alt="Kožená patchworková bunda, pohled zezadu" width="1000" height="1333">
+    </div>
+    <div class="hero-text">
+      <div class="wrap">
+        <p>Ruční šití, opravy a&nbsp;autorské kousky.</p>
+        <a class="btn" href="#kontakt">Kontaktovat</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="intro" id="sluzby">
+    <div class="wrap">
+      <h2>Co dělám</h2>
+      <div>
+        <p class="lead">Opravím a upravím oblečení, aby znovu sedělo, a ušiji originální kousky podle vlastních nápadů i vašeho přání.</p>
+        <ul class="tags">
+          <li>Opravy oděvů</li>
+          <li>Úpravy na míru</li>
+          <li>Šití na zakázku</li>
+          <li>Autorská tvorba</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="galerie">
+    <div class="wrap">
+      <div class="sec-head"><h2>Galerie</h2><p>Výběr z mé práce</p></div>
+      <div class="gallery">
+        <figure><img src="img/bunda-predni.jpg" alt="Patchworková bunda z kůže zepředu" loading="lazy" width="1000" height="1333"><figcaption>Kožená bunda, patchwork</figcaption></figure>
+        <figure><img src="img/bunda-zadni.jpg" alt="Patchworková bunda z kůže zezadu" loading="lazy" width="1000" height="1333"><figcaption>Kožená bunda, záda</figcaption></figure>
+        <figure><div class="ph">Foto 3</div></figure>
+        <figure><div class="ph">Foto 4</div></figure>
+        <figure><div class="ph">Foto 5</div></figure>
+        <figure><div class="ph">Foto 6</div></figure>
+      </div></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- CENÍK: zatím skrytý. Až bude potřeba, smažte atribut hidden a odkomentujte odkaz v menu. -->
+  <section id="cenik" hidden>
+    <div class="wrap">
+      <div class="sec-head"><h2>Ceník</h2><p>Orientační ceny, přesnou cenu řeknu po prohlédnutí.</p></div>
+      <ul class="plist">
+        <li><span>Zkrácení kalhot</span><span class="p">od 000 Kč</span></li>
+        <li><span>Výměna zipu</span><span class="p">od 000 Kč</span></li>
+        <li><span>Zúžení / rozšíření</span><span class="p">od 000 Kč</span></li>
+        <li><span>Oprava švu, záplata</span><span class="p">od 000 Kč</span></li>
+        <li><span>Šití na zakázku</span><span class="p">dohodou</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contact" id="kontakt">
+    <div class="wrap">
+      <div class="sec-head"><h2>Kontakt</h2><p>Zavolejte nebo napište, domluvíme se.</p></div>
+      <div class="contact-grid">
+        <div><p class="k">Telefon</p><p class="v"><a href="tel:+420000000000">+420 000 000 000</a></p></div>
+        <div><p class="k">E-mail</p><p class="v"><a href="mailto:info@mirona.cz">info@mirona.cz</a></p></div>
+        <div><p class="k">Adresa</p><p class="v">Ulice 123<br>000 00 Město</p></div>
+        <div><p class="k">Kdy</p><p class="v">Po domluvě</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo-mark" role="img" aria-label="MIRONA"></span>
+    <span>© <span id="yr">2026</span> MIRONA · mirona.cz</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
