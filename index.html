@@ -104,17 +104,18 @@ section{padding-block:72px}
 .lightbox figure{position:relative}
 .lb-btn,.lightbox figcaption{opacity:0;transition:opacity .35s ease .15s}
 .lightbox.on .lb-btn,.lightbox.on figcaption{opacity:1}
-.lightbox img{will-change:transform;transform-origin:0 0;cursor:zoom-out;box-shadow:0 18px 60px rgba(0,0,0,.25)}
-.lightbox figure{margin:0;height:100%;display:grid;grid-template-rows:1fr auto;place-items:center;padding:max(56px,env(safe-area-inset-top,0px)) 64px max(20px,env(safe-area-inset-bottom,0px))}
-.lightbox img{max-width:100%;max-height:calc(100dvh - 140px);object-fit:contain;border-radius:4px}
-.lightbox figcaption{font-size:1rem;letter-spacing:.04em;margin-top:12px;text-align:center;background:var(--bg);padding:4px 14px;border-radius:20px}
-.lb-btn{position:absolute;background:var(--bg);color:var(--ink);border:1px solid var(--ink);box-shadow:0 2px 10px rgba(0,0,0,.06);transition:background .2s ease,color .2s ease;width:48px;height:48px;border-radius:50%;font-size:1.9rem;line-height:1;cursor:pointer;display:grid;place-items:center}
+.lightbox img{will-change:transform;transform-origin:0 0;cursor:zoom-out;box-shadow:0 18px 60px rgba(0,0,0,.25);display:block}
+.lightbox figure{margin:0;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:max(28px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb-frame{position:relative;line-height:0;max-width:100%}
+.lightbox img{max-width:100%;max-height:calc(100dvh - 130px);object-fit:contain;border-radius:4px}
+.lb-bar{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;max-width:100%}
+.lightbox figcaption{font-size:1rem;letter-spacing:.04em;text-align:center;background:var(--bg);padding:5px 16px;border-radius:20px;box-shadow:0 2px 10px rgba(0,0,0,.06);min-width:0}
+.lb-btn{flex:none;background:var(--bg);color:var(--ink);border:0;box-shadow:0 2px 10px rgba(0,0,0,.1);width:36px;height:36px;border-radius:50%;padding:0;cursor:pointer;display:grid;place-items:center;transition:background .2s ease,color .2s ease}
+.lb-btn svg{width:16px;height:16px}
 .lb-btn:hover{background:var(--ink);color:var(--bg)}
-.lb-close{top:max(14px,env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px))}
-.lb-prev{left:max(10px,env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%)}
-.lb-next{right:max(10px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%)}
+.lb-close{position:absolute;top:12px;right:12px}
 .lb-btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
-@media (max-width:700px){.lightbox figure{padding-inline:12px;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}.lightbox img{max-height:calc(100dvh - 210px)}.lb-prev,.lb-next{top:auto;bottom:max(16px,env(safe-area-inset-bottom,0px));transform:none}}
+@media (max-width:700px){.lightbox img{max-height:calc(100dvh - 150px)}.lightbox figcaption{font-size:.88rem;padding:5px 12px}.lb-bar{gap:8px}}
 
 /* plovoucí tlačítko */
 .fab{position:fixed;z-index:8;right:max(20px,calc(env(safe-area-inset-right,0px) + 12px));bottom:max(20px,calc(env(safe-area-inset-bottom,0px) + 12px));background:var(--ink);color:#fff;text-decoration:none;font-family:var(--f-soft);font-weight:600;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;padding:15px 24px;border-radius:40px;box-shadow:0 6px 22px rgba(0,0,0,.18);transition:opacity .3s ease,transform .3s ease}
@@ -256,12 +257,16 @@ footer .logo-mark{height:30px;background:var(--ink)}
 <dialog class="lightbox" id="lightbox" aria-label="Zvětšená fotka">
   <div class="lb-bg"></div>
   <figure>
-    <img id="lb-img" src="" alt="">
-    <figcaption id="lb-cap"></figcaption>
+    <div class="lb-frame">
+      <img id="lb-img" src="" alt="">
+      <button type="button" class="lb-btn lb-close" id="lb-close" aria-label="Zavřít"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="lb-bar">
+      <button type="button" class="lb-btn lb-prev" id="lb-prev" aria-label="Předchozí fotka"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <figcaption id="lb-cap"></figcaption>
+      <button type="button" class="lb-btn lb-next" id="lb-next" aria-label="Další fotka"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
   </figure>
-  <button type="button" class="lb-btn lb-close" id="lb-close" aria-label="Zavřít"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  <button type="button" class="lb-btn lb-prev" id="lb-prev" aria-label="Předchozí fotka"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-  <button type="button" class="lb-btn lb-next" id="lb-next" aria-label="Další fotka"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
 </dialog>
 
 <footer>
@@ -336,7 +341,7 @@ footer .logo-mark{height:30px;background:var(--ink)}
   document.getElementById('lb-prev').addEventListener('click',function(){step(-1)});
   document.getElementById('lb-next').addEventListener('click',function(){step(1)});
   lb.addEventListener('cancel',function(e){e.preventDefault();close()});
-  lb.addEventListener('click',function(e){var c=e.target.className;if(e.target.tagName==='FIGURE'||e.target===img||c==='lb-bg')close()});
+  lb.addEventListener('click',function(e){var c=e.target.className;if(e.target.tagName==='FIGURE'||e.target===img||c==='lb-bg'||c==='lb-bar')close()});
   lb.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')step(-1);if(e.key==='ArrowRight')step(1)});
   var x0=null;
   lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
