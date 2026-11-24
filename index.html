@@ -92,6 +92,36 @@ section{padding-block:72px}
 .gallery figcaption{position:absolute;left:12px;bottom:10px;font-size:.82rem;letter-spacing:.06em;color:var(--ink);background:color-mix(in srgb,var(--bg) 88%,transparent);padding:4px 10px;border-radius:20px}
 @media (max-width:700px){.gallery{grid-template-columns:repeat(2,1fr);gap:8px}.hero-photos{gap:8px;padding-top:12px}}
 @media (prefers-reduced-motion:reduce){.gallery .ph,.gallery img{transition:none}}
+.g-open{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.gallery .soon{display:grid;place-items:center;aspect-ratio:4/5;background:var(--soft);border:1px dashed var(--line);text-align:center;color:var(--muted);font-family:var(--f-soft);font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;line-height:1.8;padding:16px}
+@media (max-width:700px){.gallery .soon{grid-column:span 2;aspect-ratio:auto;padding-block:36px}}
+
+/* zvětšená fotka */
+.lightbox{border:0;padding:0;margin:0;width:100vw;height:100dvh;max-width:none;max-height:none;background:rgba(17,17,17,.94);color:#fff}
+.lightbox::backdrop{background:rgba(17,17,17,.94)}
+.lightbox figure{margin:0;height:100%;display:grid;grid-template-rows:1fr auto;place-items:center;padding:max(56px,env(safe-area-inset-top,0px)) 64px max(20px,env(safe-area-inset-bottom,0px))}
+.lightbox img{max-width:100%;max-height:calc(100dvh - 140px);object-fit:contain;border-radius:4px}
+.lightbox figcaption{font-size:1rem;letter-spacing:.04em;padding-top:12px;text-align:center}
+.lb-btn{position:absolute;background:rgba(255,255,255,.12);color:#fff;border:0;width:48px;height:48px;border-radius:50%;font-size:1.9rem;line-height:1;cursor:pointer;display:grid;place-items:center}
+.lb-btn:hover{background:rgba(255,255,255,.25)}
+.lb-close{top:max(14px,env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px))}
+.lb-prev{left:max(10px,env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%)}
+.lb-next{right:max(10px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%)}
+.lb-btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (max-width:700px){.lightbox figure{padding-inline:12px}.lb-prev,.lb-next{top:auto;bottom:max(16px,env(safe-area-inset-bottom,0px));transform:none}}
+
+/* plovoucí tlačítko */
+.fab{position:fixed;z-index:8;right:max(20px,calc(env(safe-area-inset-right,0px) + 12px));bottom:max(20px,calc(env(safe-area-inset-bottom,0px) + 12px));background:var(--ink);color:#fff;text-decoration:none;font-family:var(--f-soft);font-weight:600;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;padding:15px 24px;border-radius:40px;box-shadow:0 6px 22px rgba(0,0,0,.18);transition:opacity .3s ease,transform .3s ease}
+.fab:hover{opacity:.88}
+.fab.is-hidden{opacity:0;transform:translateY(12px);pointer-events:none}
+@media (max-width:520px){.fab{left:max(16px,calc(env(safe-area-inset-left,0px) + 8px));right:max(16px,calc(env(safe-area-inset-right,0px) + 8px));text-align:center}}
+@media (prefers-reduced-motion:reduce){.fab{transition:none}}
+
+/* animace při posouvání (jen se zapnutým JS a bez omezení pohybu) */
+@media (prefers-reduced-motion:no-preference){
+  .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+  .js .reveal.in{opacity:1;transform:none}
+}
 
 /* ceník – zatím skrytý */
 .plist{list-style:none;margin:0;padding:0;max-width:640px}
@@ -105,9 +135,14 @@ section{padding-block:72px}
 .contact-grid .v{font-size:1.35rem;font-weight:500;color:var(--ink);overflow-wrap:anywhere;min-width:0}
 .contact-grid a{text-decoration:none;border-bottom:1px solid var(--ink)}
 @media (max-width:900px){.contact-grid{grid-template-columns:1fr 1fr}}
+.map{position:relative;margin-top:40px;border-radius:6px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/6;min-height:220px;max-width:100%}
+.map>svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.map .pin{position:absolute;left:50%;top:50%;transform:translate(-50%,-100%)}
+.map-note{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:var(--bg);padding:6px 14px;border-radius:20px;font-size:.95rem;white-space:nowrap;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+footer{padding-bottom:96px}
 @media (max-width:520px){.contact-grid{grid-template-columns:1fr;gap:22px}}
 
-footer{padding-block:28px;font-size:.9rem;color:var(--muted);letter-spacing:.06em}
+footer{padding-top:28px;font-size:.9rem;color:var(--muted);letter-spacing:.06em}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 footer .logo-mark{height:30px;background:var(--ink)}
 </style>
@@ -135,7 +170,7 @@ footer .logo-mark{height:30px;background:var(--ink)}
       <img src="img/bunda-predni.jpg" alt="Kožená patchworková bunda, pohled zepředu" width="1000" height="1333">
       <img src="img/bunda-zadni.jpg" alt="Kožená patchworková bunda, pohled zezadu" width="1000" height="1333">
     </div>
-    <div class="hero-text">
+    <div class="hero-text reveal">
       <div class="wrap">
         <p>Ruční šití, opravy a&nbsp;autorské kousky.</p>
         <a class="btn" href="#kontakt">Kontaktovat</a>
@@ -143,7 +178,7 @@ footer .logo-mark{height:30px;background:var(--ink)}
     </div>
   </div>
 
-  <section class="intro" id="sluzby">
+  <section class="intro reveal" id="sluzby">
     <div class="wrap">
       <h2>Co dělám</h2>
       <div>
@@ -158,17 +193,13 @@ footer .logo-mark{height:30px;background:var(--ink)}
     </div>
   </section>
 
-  <section id="galerie">
+  <section id="galerie" class="reveal">
     <div class="wrap">
       <div class="sec-head"><h2>Galerie</h2><p>Výběr z mé práce</p></div>
       <div class="gallery">
-        <figure><img src="img/bunda-predni.jpg" alt="Patchworková bunda z kůže zepředu" loading="lazy" width="1000" height="1333"><figcaption>Kožená bunda, patchwork</figcaption></figure>
-        <figure><img src="img/bunda-zadni.jpg" alt="Patchworková bunda z kůže zezadu" loading="lazy" width="1000" height="1333"><figcaption>Kožená bunda, záda</figcaption></figure>
-        <figure><div class="ph">Foto 3</div></figure>
-        <figure><div class="ph">Foto 4</div></figure>
-        <figure><div class="ph">Foto 5</div></figure>
-        <figure><div class="ph">Foto 6</div></figure>
-      </div></figure>
+        <figure><button type="button" class="g-open" data-full="img/bunda-predni.jpg" data-cap="Kožená bunda, patchwork – pohled zepředu" aria-label="Zvětšit fotku: kožená bunda zepředu"><img src="img/bunda-predni.jpg" alt="Patchworková bunda z kůže zepředu" loading="lazy" width="1000" height="1333"></button><figcaption>Kožená bunda, patchwork</figcaption></figure>
+        <figure><button type="button" class="g-open" data-full="img/bunda-zadni.jpg" data-cap="Kožená bunda, patchwork – pohled zezadu" aria-label="Zvětšit fotku: kožená bunda zezadu"><img src="img/bunda-zadni.jpg" alt="Patchworková bunda z kůže zezadu" loading="lazy" width="1000" height="1333"></button><figcaption>Kožená bunda, záda</figcaption></figure>
+        <figure class="soon"><p>Další ukázky práce<br>připravujeme</p></figure>
       </div>
     </div>
   </section>
@@ -187,7 +218,7 @@ footer .logo-mark{height:30px;background:var(--ink)}
     </div>
   </section>
 
-  <section class="contact" id="kontakt">
+  <section class="contact reveal" id="kontakt">
     <div class="wrap">
       <div class="sec-head"><h2>Kontakt</h2><p>Zavolejte nebo napište, domluvíme se.</p></div>
       <div class="contact-grid">
@@ -196,9 +227,31 @@ footer .logo-mark{height:30px;background:var(--ink)}
         <div><p class="k">Adresa</p><p class="v">Ulice 123<br>000 00 Město</p></div>
         <div><p class="k">Kdy</p><p class="v">Po domluvě</p></div>
       </div>
+      <div class="map" role="img" aria-label="Náhled mapy, přesné místo doplníme">
+        <svg viewBox="0 0 800 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="800" height="360" fill="#EEEDEA"/>
+          <path d="M-20 250 C 120 210, 220 300, 380 250 S 640 170, 820 220" fill="none" stroke="#DCE3E6" stroke-width="34"/>
+          <g fill="#E3E1DC"><rect x="40" y="30" width="150" height="90" rx="4"/><rect x="230" y="30" width="120" height="120" rx="4"/><rect x="400" y="40" width="170" height="80" rx="4"/><rect x="610" y="30" width="150" height="110" rx="4"/><rect x="60" y="150" width="120" height="50" rx="4"/><rect x="420" y="150" width="130" height="40" rx="4"/><rect x="600" y="280" width="170" height="60" rx="4"/><rect x="60" y="290" width="200" height="50" rx="4"/></g>
+          <g stroke="#FFFFFF" stroke-linecap="round" fill="none"><path d="M0 135 H800" stroke-width="14"/><path d="M210 0 V360" stroke-width="12"/><path d="M380 0 L 400 360" stroke-width="10"/><path d="M590 0 V360" stroke-width="12"/><path d="M0 215 L 800 180" stroke-width="8"/></g>
+        </svg>
+        <div class="pin" aria-hidden="true"><svg viewBox="0 0 24 32" width="34" height="46"><path d="M12 0C5.4 0 0 5.3 0 11.9 0 20.8 12 32 12 32s12-11.2 12-20.1C24 5.3 18.6 0 12 0z" fill="#111"/><circle cx="12" cy="12" r="4.5" fill="#fff"/></svg></div>
+        <p class="map-note">Mapa se zobrazí po doplnění adresy</p>
+      </div>
     </div>
   </section>
 </main>
+
+<a class="fab" id="fab" href="#kontakt">Objednat konzultaci</a>
+
+<dialog class="lightbox" id="lightbox" aria-label="Zvětšená fotka">
+  <figure>
+    <img id="lb-img" src="" alt="">
+    <figcaption id="lb-cap"></figcaption>
+  </figure>
+  <button type="button" class="lb-btn lb-close" id="lb-close" aria-label="Zavřít">×</button>
+  <button type="button" class="lb-btn lb-prev" id="lb-prev" aria-label="Předchozí fotka">‹</button>
+  <button type="button" class="lb-btn lb-next" id="lb-next" aria-label="Další fotka">›</button>
+</dialog>
 
 <footer>
   <div class="wrap">
@@ -208,7 +261,42 @@ footer .logo-mark{height:30px;background:var(--ink)}
 </footer>
 
 <script>
-document.getElementById('yr').textContent=new Date().getFullYear();
+(function(){
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // animace při posouvání
+  var root=document.documentElement;
+  if('IntersectionObserver' in window){
+    root.classList.add('js');
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(function(el){
+      var r=el.getBoundingClientRect();
+      if(r.top<innerHeight)el.classList.add('in'); else io.observe(el);
+    });
+  }
+
+  // plovoucí tlačítko schovat, když je vidět kontakt
+  var fab=document.getElementById('fab'),kontakt=document.getElementById('kontakt');
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){fab.classList.toggle('is-hidden',es[0].isIntersecting)},{threshold:.15}).observe(kontakt);
+  }
+
+  // zvětšení fotek
+  var lb=document.getElementById('lightbox'),img=document.getElementById('lb-img'),cap=document.getElementById('lb-cap');
+  var items=[].slice.call(document.querySelectorAll('.g-open')),cur=0;
+  function show(i){cur=(i+items.length)%items.length;var b=items[cur];img.src=b.dataset.full;img.alt=b.querySelector('img').alt;cap.textContent=b.dataset.cap;}
+  function open(i){show(i);if(lb.showModal)lb.showModal();else lb.setAttribute('open','');}
+  function close(){if(lb.close)lb.close();else lb.removeAttribute('open');}
+  items.forEach(function(b,i){b.addEventListener('click',function(){open(i)})});
+  document.getElementById('lb-close').addEventListener('click',close);
+  document.getElementById('lb-prev').addEventListener('click',function(){show(cur-1)});
+  document.getElementById('lb-next').addEventListener('click',function(){show(cur+1)});
+  lb.addEventListener('click',function(e){if(e.target===lb||e.target.tagName==='FIGURE')close()});
+  lb.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1)});
+  var x0=null;
+  lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  lb.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)show(cur+(dx<0?1:-1));x0=null});
+})();
 </script>
 </body>
 </html>
