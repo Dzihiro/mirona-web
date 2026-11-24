@@ -108,8 +108,8 @@ section{padding-block:72px}
 .lightbox figure{margin:0;height:100%;display:grid;grid-template-rows:1fr auto;place-items:center;padding:max(56px,env(safe-area-inset-top,0px)) 64px max(20px,env(safe-area-inset-bottom,0px))}
 .lightbox img{max-width:100%;max-height:calc(100dvh - 140px);object-fit:contain;border-radius:4px}
 .lightbox figcaption{font-size:1rem;letter-spacing:.04em;margin-top:12px;text-align:center;background:var(--bg);padding:4px 14px;border-radius:20px}
-.lb-btn{position:absolute;background:var(--ink);color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.2);border:0;width:48px;height:48px;border-radius:50%;font-size:1.9rem;line-height:1;cursor:pointer;display:grid;place-items:center}
-.lb-btn:hover{background:#333}
+.lb-btn{position:absolute;background:var(--bg);color:var(--ink);border:1px solid var(--ink);box-shadow:0 2px 10px rgba(0,0,0,.06);transition:background .2s ease,color .2s ease;width:48px;height:48px;border-radius:50%;font-size:1.9rem;line-height:1;cursor:pointer;display:grid;place-items:center}
+.lb-btn:hover{background:var(--ink);color:var(--bg)}
 .lb-close{top:max(14px,env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px))}
 .lb-prev{left:max(10px,env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%)}
 .lb-next{right:max(10px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%)}
@@ -259,9 +259,9 @@ footer .logo-mark{height:30px;background:var(--ink)}
     <img id="lb-img" src="" alt="">
     <figcaption id="lb-cap"></figcaption>
   </figure>
-  <button type="button" class="lb-btn lb-close" id="lb-close" aria-label="Zavřít">×</button>
-  <button type="button" class="lb-btn lb-prev" id="lb-prev" aria-label="Předchozí fotka">‹</button>
-  <button type="button" class="lb-btn lb-next" id="lb-next" aria-label="Další fotka">›</button>
+  <button type="button" class="lb-btn lb-close" id="lb-close" aria-label="Zavřít"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button type="button" class="lb-btn lb-prev" id="lb-prev" aria-label="Předchozí fotka"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button type="button" class="lb-btn lb-next" id="lb-next" aria-label="Další fotka"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
 </dialog>
 
 <footer>
