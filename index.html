@@ -97,24 +97,24 @@ section{padding-block:72px}
 @media (max-width:700px){.gallery .soon{grid-column:span 2;aspect-ratio:auto;padding-block:36px}}
 
 /* zvětšená fotka */
-.lightbox{border:0;padding:0;margin:0;width:100vw;height:100dvh;max-width:none;max-height:none;background:transparent;color:#fff;overflow:hidden}
+.lightbox{border:0;padding:0;margin:0;width:100vw;height:100dvh;max-width:none;max-height:none;background:transparent;color:var(--ink);overflow:hidden}
 .lightbox::backdrop{background:transparent}
-.lb-bg{position:absolute;inset:0;background:rgba(17,17,17,.94);opacity:0;transition:opacity .45s ease}
+.lb-bg{position:absolute;inset:0;background:rgba(255,255,255,.45);-webkit-backdrop-filter:blur(10px) saturate(1.1);backdrop-filter:blur(10px) saturate(1.1);opacity:0;transition:opacity .45s ease}
 .lightbox.on .lb-bg{opacity:1}
 .lightbox figure{position:relative}
 .lb-btn,.lightbox figcaption{opacity:0;transition:opacity .35s ease .15s}
 .lightbox.on .lb-btn,.lightbox.on figcaption{opacity:1}
-.lightbox img{will-change:transform;transform-origin:0 0}
+.lightbox img{will-change:transform;transform-origin:0 0;cursor:zoom-out;box-shadow:0 18px 60px rgba(0,0,0,.25)}
 .lightbox figure{margin:0;height:100%;display:grid;grid-template-rows:1fr auto;place-items:center;padding:max(56px,env(safe-area-inset-top,0px)) 64px max(20px,env(safe-area-inset-bottom,0px))}
 .lightbox img{max-width:100%;max-height:calc(100dvh - 140px);object-fit:contain;border-radius:4px}
-.lightbox figcaption{font-size:1rem;letter-spacing:.04em;padding-top:12px;text-align:center}
-.lb-btn{position:absolute;background:rgba(255,255,255,.12);color:#fff;border:0;width:48px;height:48px;border-radius:50%;font-size:1.9rem;line-height:1;cursor:pointer;display:grid;place-items:center}
-.lb-btn:hover{background:rgba(255,255,255,.25)}
+.lightbox figcaption{font-size:1rem;letter-spacing:.04em;margin-top:12px;text-align:center;background:var(--bg);padding:4px 14px;border-radius:20px}
+.lb-btn{position:absolute;background:var(--ink);color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.2);border:0;width:48px;height:48px;border-radius:50%;font-size:1.9rem;line-height:1;cursor:pointer;display:grid;place-items:center}
+.lb-btn:hover{background:#333}
 .lb-close{top:max(14px,env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px))}
 .lb-prev{left:max(10px,env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%)}
 .lb-next{right:max(10px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%)}
-.lb-btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
-@media (max-width:700px){.lightbox figure{padding-inline:12px}.lb-prev,.lb-next{top:auto;bottom:max(16px,env(safe-area-inset-bottom,0px));transform:none}}
+.lb-btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+@media (max-width:700px){.lightbox figure{padding-inline:12px;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}.lightbox img{max-height:calc(100dvh - 210px)}.lb-prev,.lb-next{top:auto;bottom:max(16px,env(safe-area-inset-bottom,0px));transform:none}}
 
 /* plovoucí tlačítko */
 .fab{position:fixed;z-index:8;right:max(20px,calc(env(safe-area-inset-right,0px) + 12px));bottom:max(20px,calc(env(safe-area-inset-bottom,0px) + 12px));background:var(--ink);color:#fff;text-decoration:none;font-family:var(--f-soft);font-weight:600;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;padding:15px 24px;border-radius:40px;box-shadow:0 6px 22px rgba(0,0,0,.18);transition:opacity .3s ease,transform .3s ease}
@@ -336,7 +336,7 @@ footer .logo-mark{height:30px;background:var(--ink)}
   document.getElementById('lb-prev').addEventListener('click',function(){step(-1)});
   document.getElementById('lb-next').addEventListener('click',function(){step(1)});
   lb.addEventListener('cancel',function(e){e.preventDefault();close()});
-  lb.addEventListener('click',function(e){var c=e.target.className;if(e.target.tagName==='FIGURE'||c==='lb-bg')close()});
+  lb.addEventListener('click',function(e){var c=e.target.className;if(e.target.tagName==='FIGURE'||e.target===img||c==='lb-bg')close()});
   lb.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')step(-1);if(e.key==='ArrowRight')step(1)});
   var x0=null;
   lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
